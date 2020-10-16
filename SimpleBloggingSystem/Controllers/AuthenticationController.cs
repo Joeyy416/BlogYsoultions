@@ -67,5 +67,13 @@ namespace SimpleBloggingSystem.Controllers
             return new HttpResponseMessage { StatusCode = HttpStatusCode.BadRequest };
             //return  Json ( new { StatusCode= HttpStatusCode.OK });
         }
+        
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            return RedirectToAction("Login", "Authentication");
+        }
     }
 }
