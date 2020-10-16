@@ -3,15 +3,17 @@
 @{
     ViewBag.Title = "AddArticle";
 }
+<div class="m-3">
+    @using (Html.BeginForm("AddArticle", "Article", FormMethod.Post, new { @id = "myForm" }))
+    {
+        @Html.TextAreaFor(model => model.ArticleBody, new { @class = "form-control", @placeholder = "Your article here" })
+        @Html.ValidationMessageFor(model => model.ArticleBody, "", new { @class = "text-danger" })
+        @Html.DropDownListFor(model => model.Category.Id, ViewBag.Category as SelectList, "--Select Category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Category.Id, "", new { @class = "text-danger" })
 
-@using (Html.BeginForm("AddArticle","Article",FormMethod.Post , new { @id="myForm" }))
-{
-    @Html.TextAreaFor(model => model.ArticleBody, new { @class = "form-control", @placeholder = "Your article here" })
-    @Html.ValidationMessageFor(model=>model.ArticleBody,"",new { @class="text-danger"})
-    @Html.DropDownListFor(model => model.Category.Id, ViewBag.Category as SelectList,"--Select Category",new { @class = "form-control"} )
-    @Html.ValidationMessageFor(model => model.Category.Id, "", new { @class = "text-danger" })
+        <input type="submit" class="btn btn-success" value="Add Me">
+}   
+</div>
 
-    <input type="submit" class="btn btn-success" value="Add Me">
-}
 
 

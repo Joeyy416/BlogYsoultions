@@ -5,14 +5,16 @@
 }
 
 <h2>Login</h2>
+<div class="m-3">
+    <form id="myForm" method="post">
+        <input type="text" placeholder="User Name" class="form-control" name="name" required/>
+        <input type="password" placeholder="Password" class="form-control" name="password" required/>
+        <input type="hidden" name="token" id="token" />
 
-<form id="myForm" method="post">
-    <input type="text" placeholder="UserName" class="form-control" name="name" />
-    <input type="password" placeholder="Password" class="form-control" name="password"/>
-    <input type="hidden" name="token" id="token"/>
+        <button class="btn btn-primary" onclick="signIn()">Sign in</button>
+    </form>
 
-    <button class="btn btn-primary" onclick="signIn()">Sign in</button>   
-</form>
+</div>
 
 
 
@@ -38,7 +40,6 @@
                     }
                     else if (response.StatusCode == 200) {
                         alert("Welcome!");
-                        $("#token").val(response.HttpMessage);
                         window.location.href = "/Article/GetArticles"
 
                     }

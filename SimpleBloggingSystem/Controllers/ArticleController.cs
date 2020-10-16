@@ -9,9 +9,10 @@ namespace SimpleBloggingSystem.Controllers
 {
     public class ArticleController : Controller
     {
-        // GET: Article
+        // GET: the Articles and preview them
         public ActionResult GetArticles()
         {
+            //Check the authentication of the user
             var token = "";
             if(Session["token"] != null)
             {
@@ -51,29 +52,13 @@ namespace SimpleBloggingSystem.Controllers
             return View(articles);
         }
 
-        //public ActionResult GetArticles(int CategoryId)
-        //{
-        //    //Getting an instance of the DB
-        //    var context = new BlogContext();
-
-        //    //Getting the articles list
-        //    var articles =  context.Articles.Where(x => x.Category.Id == CategoryId).ToList();
-
-
-
-        //    var categories = context.Categories.ToList();
-
-        //    ViewBag.articles = articles;
-        //    ViewBag.categories = categories;
-
-        //    //returning the list of the articles to the view
-        //    return View(articles);
-        //}
-       
+        
+        //Adding articles
         //GET: Add article view
 
         public ActionResult AddArticle()
         {
+            //check the user before getting the view of adding new article
             if (Session["UserId"] == null)
             {
                 return RedirectToAction("Login", "Authentication");
@@ -125,7 +110,7 @@ namespace SimpleBloggingSystem.Controllers
         }
 
         //Editing Article
-        //Get the view of editing
+        //Get the view of editing article
         [HttpGet]
         public ActionResult EditArticle(int ArticleId)
         {

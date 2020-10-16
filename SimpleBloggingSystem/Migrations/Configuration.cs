@@ -45,73 +45,80 @@
             context.Users.AddOrUpdate(u=>u.Name, new User
             {
                 Name="Hazem",
-                Email="Hazem@admin.com",
+                Email="admin@admin.com",
                 Password="admin",
                 Role=UserRole.Admin
             });
             context.Users.AddOrUpdate(u => u.Name, new User
             {
+                Name = "Hatem",
+                Email = "another@admin.com",
+                Password = "admin",
+                Role = UserRole.Admin
+            });
+            context.Users.AddOrUpdate(u => u.Name, new User
+            {
                 Name = "Ali",
-                Email = "Ali@Mod.com",
+                Email = "moderator@Mod.com",
                 Password = "moderator",
                 Role = UserRole.Moderator
             });
             context.Users.AddOrUpdate(u => u.Name, new User
             {
                 Name = "Alia",
-                Email = "Alia@Mod.com",
+                Email = "another@Mod.com",
                 Password = "moderator",
                 Role = UserRole.Moderator
             });
             context.Users.AddOrUpdate(u => u.Name, new User
             {
                 Name = "Farid",
-                Email = "farid@visit.com",
+                Email = "visitor@visit.com",
                 Password = "visitor",
                 Role = UserRole.Visitor
             });
             context.Users.AddOrUpdate(u => u.Name, new User
             {
                 Name = "Farida",
-                Email = "farida@visit.com",
+                Email = "another@visit.com",
                 Password = "visitor",
                 Role = UserRole.Visitor
             });
 
-            //Adding Articles
-            context.Articles.AddOrUpdate(a => a.Id, new Article
-            {
-                PublishingDate = DateTime.Today,
-                ArticleBody = "Sport is too good way to play football. too much energetic",
-                ArticleOwner = context.Users.Single(u => u.Id == 1),
-                Category = context.Categories.Single(c => c.Name == "Sports"),
+            ////Adding Articles
+            //context.Articles.AddOrUpdate(a => a.Id, new Article
+            //{
+            //    PublishingDate = DateTime.Today,
+            //    ArticleBody = "Sport is too good way to play football. too much energetic",
+            //    ArticleOwner = context.Users.Single(u => u.Id == 1),
+            //    Category = context.Categories.Single(c => c.Name == "Sports"),
                
-            });
-            context.Articles.AddOrUpdate(a => a.Id, new Article
-            {
-                PublishingDate = DateTime.Today,
-                ArticleBody = "Art is too good way to Understand how people think. too much senstaions",
-                ArticleOwner = context.Users.Single(u => u.Id == 1),
-                Category = context.Categories.Single(c => c.Name == "Art"),
+            //});
+            //context.Articles.AddOrUpdate(a => a.Id, new Article
+            //{
+            //    PublishingDate = DateTime.Today,
+            //    ArticleBody = "Art is too good way to Understand how people think. too much senstaions",
+            //    ArticleOwner = context.Users.Single(u => u.Id == 1),
+            //    Category = context.Categories.Single(c => c.Name == "Art"),
 
-            });
-            //Adding Comments
-            context.Comments.AddOrUpdate(c => c.Id, new Comment
-            {
-                CommentDate = DateTime.Today,
-                CommentBody = "That's right",
-                CommentOwner = context.Users.Single(u => u.Id == 4),
-                Article = context.Articles.Single(a => a.Id == 1),
-                IsApproved = false
-            });
-            context.Comments.AddOrUpdate(c=>c.Id, new Comment
-            {
-                CommentDate = DateTime.Today,
-                CommentBody = "That's wrong btw",
-                CommentOwner = context.Users.Single(u => u.Id == 5),
-                Article = context.Articles.Single(a => a.Id == 1),
-                IsApproved = false
-            });                    
+            //});
+            ////Adding Comments
+            //context.Comments.AddOrUpdate(c => c.Id, new Comment
+            //{
+            //    CommentDate = DateTime.Today,
+            //    CommentBody = "That's right",
+            //    CommentOwner = context.Users.Single(u => u.Id == 4),
+            //    Article = context.Articles.Single(a => a.Id == 1),
+            //    IsApproved = false
+            //});
+            //context.Comments.AddOrUpdate(c=>c.Id, new Comment
+            //{
+            //    CommentDate = DateTime.Today,
+            //    CommentBody = "That's wrong btw",
+            //    CommentOwner = context.Users.Single(u => u.Id == 5),
+            //    Article = context.Articles.Single(a => a.Id == 1),
+            //    IsApproved = false
+            //});                    
                  
             //context.SaveChanges();
         }

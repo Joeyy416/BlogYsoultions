@@ -9,7 +9,7 @@ namespace SimpleBloggingSystem.Controllers
 {
     public class CommentsController : Controller
     {
-        // GET: Comments
+        // GET: Add Comments view
         public ActionResult AddComment(int ArticleId)
         {
             if (Session["UserId"] == null)
@@ -21,6 +21,8 @@ namespace SimpleBloggingSystem.Controllers
             return View();
         }
 
+
+        //Adding comment method
         [HttpPost]
         public ActionResult AddComment(Comment model,int articleId)
         {

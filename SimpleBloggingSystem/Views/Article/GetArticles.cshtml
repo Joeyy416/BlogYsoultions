@@ -6,6 +6,7 @@
     
 }
 
+@*Filter by category dropdown*@
 <div class="w-25 m-4">
     @Html.DropDownList("Catgeory", categories as SelectList, "--Select Category",
                         new { @class = "form-control", @id = "filterDropdown" })
@@ -108,14 +109,6 @@
                     $(".cardHide").show();
                     }
             }
-
-            function logout() {
-                document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                localStorage.removeItem('token')
-                sessionStorage.removeItem('token')
-                alert("Good Bye");
-            }
-    
         }); 
 
     </script>

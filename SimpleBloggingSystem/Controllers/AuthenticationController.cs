@@ -14,12 +14,15 @@ namespace SimpleBloggingSystem.Controllers
     public class AuthenticationController : Controller
     {
 
-        // GET: Authentication
+        // GET: Login view
         public ActionResult Login()
         {
-            return View();
+            if(Session["UserId"] == null)
+                return View();
+            return RedirectToAction("GetArticles","Article");
         }
 
+        //Login method using JWT authentication
         [HttpPost]
         public ActionResult Login(User user)
         {

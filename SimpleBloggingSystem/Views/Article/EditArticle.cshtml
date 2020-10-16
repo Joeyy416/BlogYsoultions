@@ -4,19 +4,20 @@
 }
 
 <h2>EditArticle</h2>
+<div class="m-3">
+    @using (Html.BeginForm("EditArticle", "Article", FormMethod.Post))
+    {
+        @Html.TextAreaFor(model => model.ArticleBody, new { @class = "form-control", @placeholder = "Your article here" })
+        @Html.ValidationMessageFor(model => model.ArticleBody, "", new { @class = "text-danger" })
+        @Html.DropDownListFor(model => model.Category.Id, ViewBag.Category as SelectList, "--Select Category", new { @class = "form-control dropDownCategory" })
+        @Html.ValidationMessageFor(model => model.Category.Id, "", new { @class = "text-danger" })
 
-@using (Html.BeginForm("EditArticle", "Article", FormMethod.Post))
-{
-    @Html.TextAreaFor(model => model.ArticleBody, new { @class = "form-control", @placeholder = "Your article here" })
-    @Html.ValidationMessageFor(model => model.ArticleBody, "", new { @class = "text-danger" })
-    @Html.DropDownListFor(model => model.Category.Id, ViewBag.Category as SelectList, "--Select Category", new { @class = "form-control dropDownCategory" })
-    @Html.ValidationMessageFor(model => model.Category.Id, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-    @Html.HiddenFor(model=>model.Id)
-
-    <input id="categoryId" type="hidden" value="@Model.Category.Id"/>
-    <input type="submit" class="btn btn-success" value="Edit Me">
-}
+        <input id="categoryId" type="hidden" value="@Model.Category.Id" />
+        <input type="submit" class="btn btn-success" value="Edit Me">
+    }
+</div>
 
 
 
