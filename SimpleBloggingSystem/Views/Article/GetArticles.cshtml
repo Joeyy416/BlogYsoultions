@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "GetArticles";
+    var articles = ViewBag.articles;
+    var categories = new SelectList (ViewBag.categories,"Name","Name");
+    
+}
+
+<div class="w-25 m-4">
+    @Html.DropDownList("Catgeory", categories as SelectList, "--Select Category",
+                        new { @class = "form-control", @id = "filterDropdown" })
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-10">
+        @if (Session["UserRole"].ToString() == "Admin")
+        {
+            <a href="/Article/AddArticle" class="btn btn-primary">Add new article</a>
+        }
+        
+        @foreach (var article in articles)
+        {
+            <div class="@article.Category.Name cardHide">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Article By: @article.ArticleOwner.Name</h2>
+                        <h6 class="card-title">@article.Category.Name</h6>
+                        <div>@article.PublishingDate</div>
+
+                        <div class="d-md-inline-block">
+                            <strong><p class="card-text">@article.ArticleBody</p></strong>
+                            @if (Session["UserRole"].ToString() == "Admin" || Session["UserRole"].ToString() == "Moderator")
+                            {
+                                <div class="d-md-inline-block float-right">
+                                    <a href="/Article/EditArticle?ArticleId=@article.Id" class="btn btn-warning">Edit</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    @if (@article.Comments != null)
+                {
+                        <div class="row d-md-inline-block">
+                            <ul class="list-group list-group-flush">
+                                @foreach (var comment in @article.Comments)
+                                {
+                                    if (@comment.IsApproved == true) { 
+                                    <li class="list-group-item">
+                                        <strong>@comment.CommentOwner.Name: </strong>@comment.CommentBody
+                                    </li>
+                                    }
+                                    else if (@comment.reasonForDisApproval == null)
+                                    {
+                                        if (Session["UserRole"].ToString() == "Admin" || Session["UserRole"].ToString() == "Moderator")
+                                        {
+                                            <li class="list-group-item">
+                                                <div class="col-md-4">
+                                                    <strong>@comment.CommentOwner.Name: </strong>@comment.CommentBody  <strong>(not approved yet)</strong>
+                                                </div>
+                                                <div class="col-md-3 float-right">
+                                                    <a href="/Comments/ApproveComment?CommentId=@comment.Id" class="btn btn-outline-warning">Approve Comment</a>
+                                                </div>
+                                                <div class="col-md-3 float-right">
+                                                    <a href="/Comments/DisapproveComment?CommentId=@comment.Id" class="btn btn-outline-danger">Disapprove Comment</a>
+                                                </div>
+                                            </li>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (Session["UserRole"].ToString() == "Admin" || Session["UserRole"].ToString() == "Moderator") { 
+                                        <li class="list-group-item">
+                                            <strong>@comment.CommentOwner.Name: </strong>@comment.CommentBody  <strong>(Unapproved) Beacause: </strong> @comment.reasonForDisApproval
+                                        </li>
+                                        }
+                                    }
+
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <a href="/Comments/AddComment?ArticleId=@article.Id" class="btn btn-primary col-md-3">Add Comment</a>
+
+                </div>
+                <hr />
+            </div>
+        }
+        
+    </div>
+</div>
+
+@section scripts{
+    
+    <script>
+        $(document).ready(function () {
+
+            $("#filterDropdown").change(hideArticles);
+            function hideArticles() {
+                var value = $("#filterDropdown").val();
+                    if (value) {
+                    $(".cardHide").hide();
+                    $("." + value).show();
+                    }       
+                    else {
+                    $(".cardHide").show();
+                    }
+            }
+
+            function logout() {
+                document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                localStorage.removeItem('token')
+                sessionStorage.removeItem('token')
+                alert("Good Bye");
+            }
+    
+        }); 
+
+    </script>
+       
+    
+    }
+

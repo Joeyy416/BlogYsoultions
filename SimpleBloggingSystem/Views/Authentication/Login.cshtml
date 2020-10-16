@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    
+}
+
+<h2>Login</h2>
+
+<form id="myForm" method="post">
+    <input type="text" placeholder="UserName" class="form-control" name="name" />
+    <input type="password" placeholder="Password" class="form-control" name="password"/>
+    <input type="hidden" name="token" id="token"/>
+
+    <button class="btn btn-primary" onclick="signIn()">Sign in</button>   
+</form>
+
+
+
+@section scripts{
+    <script>
+
+        function signIn() {
+
+            var formData = $("#myForm").serialize();
+
+            $.ajax({
+                type: "Post",
+                url: "/Authentication/Login",
+                data: formData,
+                success: function (response) {
+                    if (response.StatusCode == 404){
+                        alert(response.HttpMessage);
+                        window.location.href = "/Authentication/Login"
+                    }
+                    else if (response.StatusCode == 403) {
+                        alert(response.HttpMessage);
+                        window.location.href="/Authentication/Login"
+                    }
+                    else if (response.StatusCode == 200) {
+                        alert("Welcome!");
+                        $("#token").val(response.HttpMessage);
+                        window.location.href = "/Article/GetArticles"
+
+                    }
+
+                }
+
+            });
+        }
+
+
+
+    </script>
+    
+    
+    }

@@ -1,0 +1,16 @@
+﻿@model SimpleBloggingSystem.Models.Comment
+
+@{
+    ViewBag.Title = "DispproveComment";
+}
+
+<h2>DispproveComment</h2>
+
+@using (Html.BeginForm("DisapproveComment", "Comments", FormMethod.Post))
+{
+    @Html.TextAreaFor(model => model.reasonForDisApproval, new { @class = "form-control", @placeholder = "Reason Of Disapproval" })
+    
+
+    @Html.HiddenFor(model => model.Id)
+    <input type="submit" class="btn btn-success" value="Add Reason">
+}

@@ -1,0 +1,17 @@
+﻿@model SimpleBloggingSystem.Models.Comment
+@{
+    ViewBag.Title = "AddComment";
+    var articleId= ViewBag.ArticleId; 
+}
+
+<h2>AddComment</h2>
+
+@using (Html.BeginForm("AddComment", "Comments", FormMethod.Post))
+{
+    @Html.TextAreaFor(model => model.CommentBody, new { @class = "form-control", @placeholder = "Your comment here" })
+    @Html.ValidationMessageFor(model =>model.CommentBody,"", new { @class="text-danger"})
+    <input name="articleId" type="hidden" value="@articleId"/>
+    @*@Html.HiddenFor(model => model.Article.Id )*@
+
+    <input type="submit" class="btn btn-success" value="Add Me">
+}
